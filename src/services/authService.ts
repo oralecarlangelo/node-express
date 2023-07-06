@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User, { UserInstance } from '../models/User';
+import User from '../models/User';
 import { LoginUserDto, RegisterUserDto } from '../dto/UserDto';
 
 const SALT_ROUNDS = 10;
@@ -42,7 +42,7 @@ export async function login(dto: LoginUserDto): Promise<LoginResponse> {
     throw new Error('Invalid password');
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'your_default_secret_key');
+  const token = jwt.sign({ id: user.id }, JWT_SECRET || 'your_default_secret_key');
   const userResponse: UserResponse = {
     id: user.id,
     email: user.email,
