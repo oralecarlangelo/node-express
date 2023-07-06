@@ -14,7 +14,7 @@ const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => 
     }
 
     // Verify token
-    const secretKey = 'your_secret_key'; // Replace with your secret key
+    const secretKey = process.env.JWT_SECRET || ""; // Replace with your secret key
     jwt.verify(token, secretKey, (error: any, decoded: any) => {
       if (error) {
         return res.status(401).json({ message: 'Auth Error: Token is not valid.' });
